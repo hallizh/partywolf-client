@@ -1,0 +1,31 @@
+<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px">
+  <div fxLayoutAlign="center">
+    <h1>
+      Partywolf
+    </h1>
+  </div>
+  <div *ngIf="!joining && !creating" fxLayout.xs="row" fxLayoutAlign="center"  fxLayoutGap="10px">
+    <div class="item item-1" fxLayoutAlign="center">
+      <button mat-raised-button color="primary" (click)="createGame();">Create</button>
+    </div>
+    <div class="item item-2" fxLayoutAlign="center" >
+      <button mat-raised-button color="primary" (click)="joining = true;">Join</button>
+    </div>
+  </div>
+  <div *ngIf="joining" class="item item-3" fxLayoutAlign="center" fxLayout.xs="column">
+    <mat-form-field>
+      <input matInput placeholder="Game ID">
+    </mat-form-field>
+    <div class="item item-2" fxLayoutAlign="center" >
+      <button mat-raised-button color="primary">Go!</button>
+    </div>
+  </div>
+  <div *ngIf="creating" fxLayout.xs="column" >
+    <h2 fxLayoutAlign="center">
+      You room number
+    </h2>
+    <p class="room-number"  fxLayoutAlign="center"  >
+      {{gameId}}
+    </p>
+  </div>
+</div>
