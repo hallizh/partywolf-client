@@ -11,11 +11,13 @@ import { CreateJoinComponent } from './create-join/create-join.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { NarratorComponent } from './narrator/narrator.component';
+import { PartywolfComponent } from './partywolf/partywolf.component';
 @NgModule({
   declarations: [
     AppComponent,
     CreateJoinComponent,
-    NarratorComponent
+    NarratorComponent,
+    PartywolfComponent
   ],
   imports: [
     BrowserModule,
