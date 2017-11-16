@@ -4,28 +4,66 @@
       Partywolf
     </h1>
   </div>
-  <div *ngIf="!joining && !creating" fxLayout.xs="row" fxLayoutAlign="center"  fxLayoutGap="10px">
-    <div class="item item-1" fxLayoutAlign="center">
-      <button mat-raised-button color="primary" (click)="createGame();">Create</button>
-    </div>
-    <div class="item item-2" fxLayoutAlign="center" >
-      <button mat-raised-button color="primary" (click)="joining = true;">Join</button>
+  <!--JOIN / CREATE BUTTONS-->
+  <div *ngIf="!joining && !creating" fxLayout.xs="column" fxLayoutAlign="center"  fxLayoutGap="10px">
+    <mat-form-field >
+      <input matInput placeholder="Nickname" [(ngModel)]="nickname">
+    </mat-form-field>
+    <div fxLayout.xs="row" fxLayoutAlign="center"  fxLayoutGap="10px">
+      <div class="item item-1" fxLayoutAlign="center">
+        <button mat-raised-button color="primary" (click)="createGame();">Create</button>
+      </div>
+      <div class="item item-2" fxLayoutAlign="center" >
+        <button mat-raised-button color="primary" (click)="joining = true;">Join</button>
+      </div>
     </div>
   </div>
+  
   <div *ngIf="joining" class="item item-3" fxLayoutAlign="center" fxLayout.xs="column">
     <mat-form-field>
       <input matInput placeholder="Game ID">
     </mat-form-field>
     <div class="item item-2" fxLayoutAlign="center" >
-      <button mat-raised-button color="primary">Go!</button>
+      <button mat-raised-button color="primary" (click)="joinGame()">Go!</button>
     </div>
   </div>
-  <div *ngIf="creating" fxLayout.xs="column" >
-    <h2 fxLayoutAlign="center">
-      You room number
-    </h2>
-    <p class="room-number"  fxLayoutAlign="center"  >
-      {{gameId}}
-    </p>
+  <div *ngIf='game?.gameid' >
+    <mat-card>
+      <mat-card-title>Room number: {{game.gameid}}</mat-card-title>
+      <!--<mat-card-subtitle>Your room number</mat-card-subtitle>-->
+      <mat-card-content>
+        <mat-divider></mat-divider>
+        
+      <mat-list>
+        <mat-list-item *ngFor="let player of game?.players">
+          <!--<mat-icon mat-list-icon>folder</mat-icon>-->
+        {{player.name}} - {{player.role}}
+        </mat-list-item>
+                <mat-list-item *ngFor="let player of game?.players">
+          <!--<mat-icon mat-list-icon>folder</mat-icon>-->
+        {{player.name}} - {{player.role}}
+        </mat-list-item>
+                <mat-list-item *ngFor="let player of game?.players">
+          <!--<mat-icon mat-list-icon>folder</mat-icon>-->
+        {{player.name}} - {{player.role}}
+        </mat-list-item>
+      </mat-list>
+
+
+<!--
+        <div  fxLayout.xs="row" *ngFor="let player of game?.players">
+          <div>{{player.name}}</div>
+          <div>{{player.role}}</div>
+        </div>-->
+      </mat-card-content>
+    </mat-card>
+<!--
+    <mat-card class="example-card" *ngFor="let player of game?.players">
+      <mat-card-header>
+        <mat-card-title>{{player.name}}</mat-card-title>
+        <mat-card-subtitle>{{player.role}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>-->
   </div>
+  
 </div>

@@ -1,8 +1,9 @@
 import { Component, OnInit,  } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 
 import { PartywolfService } from '../partywolf.service';
 import { SocketService } from '../sockets.service';
-import { Game, Player } from './game.model';
+import { Game, Player } from '../game.model';
 
 @Component({
   selector: 'app-create-join',
@@ -11,7 +12,8 @@ import { Game, Player } from './game.model';
   providers: [
     PartywolfService,
     SocketService
-  ]
+  ],
+
   // encapsulation: ViewEncapsulation.None
 })
 export class CreateJoinComponent implements OnInit {
@@ -19,24 +21,32 @@ export class CreateJoinComponent implements OnInit {
   constructor(private partywolfService: PartywolfService, private socketService: SocketService) { }
   public joining: boolean = false;
   public creating: boolean = false;
-  public gameId: string = "";
-  public  ioConnection: any;
+  public nickname: string = '';
+  public game: Game;
+  public ioConnection: any;
+
+
   ngOnInit() {
     this.socketService.initSocket();
   }
 
-  public createGame() {
+  private createGame() {
     this.creating = true;
-    this.getGameId();
-    
-  };
-  private getGameId() {
-    this.partywolfService.getGame().toPromise().then(gameId => {
-      this.gameId = gameId.game;
-      console.log(gameId);  
+    this.partywolfService.createGame(this.nickname).toPromise().then(game => {
+      this.game = game;
+      
+      console.log(game);  
     } );
   };
 
+  private joinGame() {
+    this.creating = true;
+    this.partywolfService.joinGame("mock", this.nickname).toPromise().then(game => {
+      this.game = game;
+      console.log(game);  
+      this.joining = false;
+    } );
+  };
   
   private initIoConnection(): void {
     this.socketService.initSocket();

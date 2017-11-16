@@ -1,11 +1,10 @@
 export class Game {
-  public id: string; 
-  public gameTitle: string; 
+  public gameid: string; 
   public players: Player[];
 }
 export class Player {
   public name: string; 
-  public role: Roles; 
+  public role: string; 
 }
 export enum Roles {
   Narrator,
